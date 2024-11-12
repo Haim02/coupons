@@ -1,0 +1,29 @@
+.addUserContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.addUserForm {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 70px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+}
+
+.addUserInputContainer {
+    display: flex;
+    gap: 10px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.addUserBtnContainer {
+    margin-top: 20px;
+}

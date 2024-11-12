@@ -1,0 +1,37 @@
+.couponDetailsContainer {
+    margin-left: 10px;
+}
+
+.couponDetailsCard {
+    border: solid gray 0.5px;
+}
+
+.listGroupItem {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    border-bottom: 0.5px solid black;
+    text-align: right;
+}
+
+.listGroupItem span {
+   text-align: center;
+}
+
+.listGroupItem h2 {
+    text-align: center;
+}
+
+.row {
+    padding: 0 10px;
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+.col {
+    margin-left: 10px;
+}
+
+.hr {
+    border: 1px solid rgb(238, 237, 237);
+}

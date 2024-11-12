@@ -1,0 +1,114 @@
+.couponContainer {
+     height: 70vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.couponCard {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 70px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+  }
+
+  .couponInput {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .couponInput input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+  }
+
+  .couponInput button {
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .couponInput button:hover {
+    background-color: #45a049;
+  }
+
+  .discountList {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .discountList h3 {
+    font-size: 1em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .discountList ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .discountList li {
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #555;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .discountItem{
+    margin-right: 15px;
+  }
+
+  .discountLi {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .removeBtn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 1px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 20px;
+    margin-left: 10px;
+    margin-top: 2px;
+  }
+
+  .removeBtn:hover {
+    background-color: #e53935;
+  }
+
+
+  .totalDiscount {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+.hr {
+    border: 1px solid rgb(238, 237, 237);
+    width: 100%;
+}
