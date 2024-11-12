@@ -1,25 +1,29 @@
-.updateCoumponContainer {
+.addCoumponContainer {
     width: 30%;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-family: Arial, sans-serif;
-    background-color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    margin: auto;
+    width: 50%;
+    padding: 10px;
 }
 
-.updateCoumponContainer h1 {
+.addCoumponContainer h1 {
   font-size: 24px;
   font-weight: 300;
   text-align: center;
   margin-bottom: 15px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.inputFormContainer {
+.inputAddFormContainer {
      display: flex;
      flex-direction: row;
      flex-wrap: wrap;
@@ -28,17 +32,17 @@
      justify-content: end;
      justify-content: space-between;
      justify-content: space-around;
-     background-color: rgb(246, 247, 247);
+     padding: 50px;
 }
 
-.inputContainer {
+.inputAddContainer {
     text-align: right;
     display: flex;
     flex-direction: column;
     margin-top: 10px;
 }
 
-.selectInput{
+.selectAddCouponInput {
     margin-top: 0;
 }
 
@@ -62,16 +66,17 @@
     border-radius: 0;
 }
 
-.inputContainerDate {
+.AddCouponInputContainerDate {
     margin-top: 0px;
     display: flex;
     flex-direction: column;
     text-align: right;
     margin-bottom: 2px;
+    margin-top: 5px;
 
 }
 
-.updateBtnContainer {
+.addCouponBtnContainer {
     display: flex;
     justify-content: center;
     align-self: center;

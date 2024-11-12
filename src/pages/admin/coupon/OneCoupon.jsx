@@ -18,11 +18,15 @@ const Onecoupon = () => {
     percentOrAmount: "",
   });
 
-  const handleOnChange = (e) => {
-    setCouponValues((pre) => ({
-      ...pre,
-      [e.target.name]: e.target.value.trim(),
-    }));
+  const handleOnChange = (event) => {
+    const newValue = event.target.value;
+    const inputName = event.target.name;
+    setCouponValues((prevState)=> {
+      return({
+        ...prevState,
+        [inputName]: newValue,
+      });
+    });
   };
 
   const coupon = {

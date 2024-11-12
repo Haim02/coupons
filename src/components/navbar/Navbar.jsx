@@ -24,6 +24,13 @@ const Navbar = () => {
           )}
           {user.role === "admin" && (
             <li className="navbar-item">
+              <Link to="/admin/addCoupon" className="navbarLink">
+                צור קופון
+              </Link>
+            </li>
+          )}
+          {user.role === "admin" && (
+            <li className="navbar-item">
               <Link to="/admin" className="navbarLink">
                 <PersonIcon />
               </Link>

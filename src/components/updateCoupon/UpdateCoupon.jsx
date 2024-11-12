@@ -31,7 +31,7 @@ const UpdateCoupon = ({
   });
 
   return (
-    <div className="oneCoumponWrapper">
+    <div className="updateCoumponContainer">
       <h1>עדכן קופון</h1>
       <form className="updateForm" onSubmit={hanleOnSubmit}>
         <div className="inputFormContainer">
