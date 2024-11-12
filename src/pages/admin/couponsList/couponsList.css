@@ -25,6 +25,10 @@
   bottom: -17px;
 }
 
+.inputContainer label {
+  font-size: large;
+}
+
 .viewButton {
   width: 50%;
   text-align: center;

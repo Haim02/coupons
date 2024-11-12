@@ -2,28 +2,18 @@ import React from "react";
 import Button from "../button/Button";
 import Loader from "../Loader";
 import { useCoupons } from "../../context/Coupon";
-import "./couponDetails.css";
 import { useLocation } from "react-router-dom";
+import "./couponDetails.css";
 
-const CouponDetails = ({
-  _id,
-  couponCode,
-  discount,
-  description,
-  doublePromotions,
-  expirDate,
-  limitedUses,
-  percentOrAmount,
-  createAt,
-  userId,
-  handleOnDelete,
-  isFetching,
-}) => {
+const CouponDetails = () => {
   const location = useLocation();
   const couponId = location.pathname.split("/")[2];
   const { coupons, deleteCoupon, loading } = useCoupons();
-  const coupon = coupons.find(coupon => coupon._id === couponId)
+  const coupon = coupons.find((coupon) => coupon._id === couponId);
 
+  const handleDelete = () => {
+    deleteCoupon(couponId);
+  };
 
   return (
     <div className="couponDetailsContainer">
@@ -43,7 +33,8 @@ const CouponDetails = ({
             <div className="row">
               <b className="col">:הנחה</b>
               <div className="col">
-                {coupon.discount} {coupon.percentOrAmount === "amount" ? "₪" : "%"}
+                {coupon.discount}{" "}
+                {coupon.percentOrAmount === "amount" ? "₪" : "%"}
               </div>
             </div>
           </div>
@@ -90,7 +81,7 @@ const CouponDetails = ({
               <Button
                 type="button"
                 text={loading ? <Loader /> : "מחק קופון"}
-                onClick={deleteCoupon(couponId)}
+                onClick={handleDelete}
               />
             </div>
           </div>

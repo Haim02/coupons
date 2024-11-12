@@ -1,15 +1,28 @@
-import axios from 'axios';
-import React, { createContext, useContext, useState } from 'react';
+import axios from "axios";
+import React, { createContext, useContext, useState } from "react";
 const PATH = "http://localhost:3000/api";
 
 export const CouponContext = createContext();
 
 export const CouponProvider = ({ children }) => {
   const [coupons, setCoupons] = useState([]);
+  const [coupon, setCoupon] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // GET request to grt all coupons
+  const getCouponDiscount = async (couponCode) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.post(`${PATH}/coupons/couponDiscount`, couponCode);
+      setCoupon(response.data);
+    } catch (err) {
+      setLoading(false);
+      setError("שגיאה במשיכת נתונים");
+    }
+  };
+
   const gettAllCoupons = async () => {
     setLoading(true);
     setError(null);
@@ -18,21 +31,20 @@ export const CouponProvider = ({ children }) => {
       setCoupons(response.data);
     } catch (err) {
       setLoading(false);
-      setError('שגיעה במשיכת נתונים');
-    } finally {
+      setError("שגיאה במשיכת נתונים");
     }
   };
 
   // POST request to create a coupon
   const addCoupon = async (couponData) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await axios.post(`${PATH}/createCoupon`, couponData);
       setCoupons((prevCoupons) => [...prevCoupons, response.data]);
     } catch (err) {
       setLoading(false);
-      setError('שגיעה ביצירת קופון חדש');
-    } finally {
+      setError("שגיאה ביצירת קופון חדש");
     }
   };
 
@@ -40,14 +52,16 @@ export const CouponProvider = ({ children }) => {
   const updateCoupon = async (id, updatedData) => {
     setLoading(true);
     try {
-      const response = await axios.put(`${PATH}/updateCoupon/${id}`, updatedData);
+      const response = await axios.put(
+        `${PATH}/updateCoupon/${id}`,
+        updatedData
+      );
       setCoupons((prevCoupons) =>
         prevCoupons.map((coupon) => (coupon.id === id ? response.data : coupon))
       );
     } catch (err) {
       setLoading(false);
-      setError('שגיעה בעריכת קופון');
-    } finally {
+      setError("שגיאה בעריכת קופון");
     }
   };
 
@@ -56,17 +70,28 @@ export const CouponProvider = ({ children }) => {
     setLoading(true);
     try {
       await axios.delete(`${PATH}/deleteCoupon/${id}`);
-      setCoupons((prevCoupons) => prevCoupons.filter((coupon) => coupon.id !== id));
+      setCoupons((prevCoupons) =>
+        prevCoupons.filter((coupon) => coupon.id !== id)
+      );
     } catch (err) {
       setLoading(false);
-      setError('שגיעה במחיקת קופון');
-    } finally {
+      setError("שגיאה במחיקת קופון");
     }
   };
 
   return (
     <CouponContext.Provider
-      value={{ coupons, loading, error, gettAllCoupons, addCoupon, updateCoupon, deleteCoupon }}
+      value={{
+        coupons,
+        loading,
+        error,
+        gettAllCoupons,
+        addCoupon,
+        updateCoupon,
+        deleteCoupon,
+        getCouponDiscount,
+        coupon
+      }}
     >
       {children}
     </CouponContext.Provider>
@@ -74,4 +99,3 @@ export const CouponProvider = ({ children }) => {
 };
 
 export const useCoupons = () => useContext(CouponContext);
-

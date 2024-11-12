@@ -18,8 +18,8 @@ const Login = () => {
       return;
     }
 
-    setError("")
     login( username, password )
+    setError("")
   }
 
   return (

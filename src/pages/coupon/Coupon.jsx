@@ -1,49 +1,42 @@
 import React, { useState } from "react";
 import Button from "../../components/button/Button";
+import { useCoupons } from "../../context/Coupon";
 import "./coupon.css";
+import Loader from "../../components/Loader";
 
 const Coupon = () => {
+  const { coupon, loading, getCouponDiscount } = useCoupons();
   const [price, setPrice] = useState(100);
-  const [coupon, setCoupon] = useState("");
+  const [couponCode, setCouponCode] = useState("");
   const [coupons, setCoupons] = useState([]);
   const [totalDiscount, setTotalDiscount] = useState(0);
 
+  //sent coupon code to the server and get a coupon object
   const applyCoupon = () => {
+    if (!couponCode) {
+      return;
+    }
+
+    getCouponDiscount(couponCode);
+
     let discount = 0;
-
-    if (coupon === "SALE20") {
-      discount = 20;
-    } else if (coupon === "SALE10") {
-      discount = 1;
-    } else {
-      alert("קוד קופון לא תקף");
-      return;
-    }
-
-    if (price - (totalDiscount + discount) < 0) {
-      alert("ההנחה חורגת מהסכום לתשלום");
-      return;
-    }
 
     if (coupon.percentOrAmount === "percent") {
       discount = (price * coupon.discount) / 100;
       const newCoupon = { code: coupon, discount };
       setCoupons((pre) => [...pre, newCoupon]);
       setTotalDiscount(totalDiscount + discount);
-      setCoupon("");
+      setCouponCode("");
     } else {
       const newCoupon = { code: coupon, discount, percentOrAmount: "percent" };
       setCoupons([...coupons, newCoupon]);
       setTotalDiscount(totalDiscount + discount);
-      setCoupon("");
+      setCouponCode("");
     }
 
-    if (price < 0) {
-      setPrice(0);
-    }
-
-    if (totalDiscount < 0) {
-      totalDiscount(0);
+    if (price - (totalDiscount + discount) < 0) {
+      alert("ההנחה חורגת מהסכום לתשלום");
+      return;
     }
   };
 
@@ -67,9 +60,13 @@ const Coupon = () => {
             type="text"
             placeholder="הכנס קוד קופון"
             value={coupon}
-            onChange={(e) => setCoupon(e.target.value)}
+            onChange={(e) => setCouponCode(e.target.value)}
           />
-          <Button type="button" text="הוסף קופון" onClick={applyCoupon} />
+          <Button
+            type="button"
+            text={loading ? <Loader /> : "הוסף קופון"}
+            onClick={applyCoupon}
+          />
         </div>
         {coupons.length > 0 && (
           <div className="discountList">

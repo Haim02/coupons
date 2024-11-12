@@ -1,6 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-// import { CouponProvider } from './contexts/CouponContext';
-// import { CouponContext } from "./context/coupon";
 import Coupon from "./pages/coupon/Coupon";
 import Login from "./pages/login/Login";
 import Navbar from "./components/navbar/Navbar";

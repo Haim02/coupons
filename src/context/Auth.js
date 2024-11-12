@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
       setIsAdmin(true);
       navigate("/admin");
     } else {
-      alert("שם משתמש או סיסמה לא נכונים")
+      alert("שם משתמש או סיסמה לא נכונים");
     }
   };
 
@@ -32,14 +32,16 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${PATH}/admin/addUser`, username, password);
+      const response = await axios.post(
+        `${PATH}/admin/addUser`,
+        username,
+        password
+      );
     } catch (err) {
       setLoading(false);
-      setError("משתמש לא נמצא");
-    } finally {
+      setError("שגיאה ביצירת משתמש");
     }
   };
-
 
   // GET request to get all users for filtering
   const getUsers = async () => {
@@ -47,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     try {
       const response = await axios.get(`${PATH}/admin/users`);
-      setUsers(response.data)
+      setUsers(response.data);
     } catch (err) {
       setLoading(false);
       setError("לא נמצאו משתמשים");
@@ -63,11 +65,23 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isAdmin, user , login, logout, addUser, loading, error, getUsers, users }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        isAdmin,
+        user,
+        login,
+        logout,
+        addUser,
+        loading,
+        error,
+        getUsers,
+        users,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
-// הוק מותאם לגישה קלה ל-AuthContext
 export const useAuth = () => useContext(AuthContext);

@@ -24,7 +24,7 @@ const CouponsList = () => {
 
   useEffect(() => {
     gettAllCoupons();
-    getUsers()
+    getUsers();
   }, [gettAllCoupons]);
 
   const onChangeUser = (e) => {
@@ -89,12 +89,14 @@ const CouponsList = () => {
       <h1>קופונים</h1>
       <div className="datatableCard">
         <div className="inputContainer">
-          <label>מיין לפי משתמש</label>
+          <label>סנן לפי שם משתמש</label>
           <select name="user" onChange={onChangeUser}>
             <option></option>
-            {users && users && users.map((user) => {
-              return <option value={user}>{user}</option>;
-            })}
+            {users &&
+              users &&
+              users.map((user) => {
+                return <option value={user.username}>{user.username}</option>;
+              })}
           </select>
         </div>
         <div className="inputContainer">
@@ -112,15 +114,19 @@ const CouponsList = () => {
           </LocalizationProvider>
         </div>
       </div>
-      {!coupons ? <Loader />
-       : <DataGrid
-        className="datagrid"
-        rows={coupons || 0}
-        getRowId={(row) => row?._id || 0}
-        columns={userColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-      />}
+      {loading && <Loader />}
+      {!coupons ? (
+        <h3>לא נמצאו קופונים</h3>
+      ) : (
+        <DataGrid
+          className="datagrid"
+          rows={coupons || 0}
+          getRowId={(row) => row?._id || 0}
+          columns={userColumns.concat(actionColumn)}
+          pageSize={9}
+          rowsPerPageOptions={[9]}
+        />
+      )}
     </div>
   );
 };

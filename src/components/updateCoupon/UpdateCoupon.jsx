@@ -3,26 +3,18 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
 import "dayjs/locale/he";
 import Input from "../input/Input";
 import Button from "../button/Button";
 import Loader from "./../Loader";
 import { useCoupons } from "../../context/Coupon";
-import "./updateCoupon.css";
 import { useLocation } from "react-router-dom";
+import "./updateCoupon.css";
 
-const UpdateCoupon = ({
-  hanleOnSubmit,
-  handleOnChange,
-  doublePromotions,
-  percentOrAmount,
-  isFetching,
-}) => {
+const UpdateCoupon = () => {
   const location = useLocation();
   const couponId = location.pathname.split("/")[2];
-  const { coupons, loading, updateCoupon } = useCoupons();
+  const { loading, updateCoupon, error } = useCoupons();
   let date = new Date();
   const [value, setValue] = useState(dayjs(date));
   const [couponValues, setCouponValues] = useState({
@@ -35,11 +27,25 @@ const UpdateCoupon = ({
     percentOrAmount: "",
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateCoupon(couponId, couponValues)
+  const handleOnChange = (event) => {
+    const newValue = event.target.value;
+    const inputName = event.target.name;
+    setCouponValues((prevState) => {
+      return {
+        ...prevState,
+        [inputName]: newValue,
+      };
+    });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (error) {
+      return;
+    }
+    updateCoupon(couponId, couponValues);
+    alert("הקופון עודכן בהצלחה");
+  };
 
   return (
     <div className="updateCoumponContainer">
@@ -83,7 +89,6 @@ const UpdateCoupon = ({
             <select
               className="selectInput"
               name="doublePromotions"
-              defaultValue={doublePromotions}
               onChange={handleOnChange}
             >
               <option value={false}>לא</option>
@@ -95,7 +100,6 @@ const UpdateCoupon = ({
             <select
               className="selectInput"
               name="percentOrAmount"
-              defaultValue={percentOrAmount === "amount" ? "₪" : "%"}
               onChange={handleOnChange}
             >
               <option value="amount">₪</option>
@@ -119,10 +123,8 @@ const UpdateCoupon = ({
           </div>
         </div>
         <div className="updateBtnContainer">
-          <Button
-            type="submit"
-            text={isFetching ? <Loader /> : "עדכן"}
-          />
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          <Button type="submit" text={loading ? <Loader /> : "עדכן"} />
         </div>
       </form>
     </div>
