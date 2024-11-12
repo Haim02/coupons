@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -8,14 +8,24 @@ import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import dayjs from "dayjs";
 import "dayjs/locale/he";
 import Button from "../../../components/button/Button";
+import { useCoupons } from "../../../context/Coupon";
+import { useAuth } from "../../../context/Auth";
 import "./couponsList.css";
+import Loader from "../../../components/Loader";
 
-const CouponsList = (props) => {
+const CouponsList = () => {
+  const { coupons, loading, gettAllCoupons } = useCoupons();
+  const { users, getUsers } = useAuth();
   let date = new Date();
   const [dateRange, setDateRange] = useState([dayjs(date), dayjs(date)]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [user, setUser] = useState("");
+
+  useEffect(() => {
+    gettAllCoupons();
+    getUsers()
+  }, [gettAllCoupons]);
 
   const onChangeUser = (e) => {
     setUser(e.target.value);
@@ -34,44 +44,6 @@ const CouponsList = (props) => {
       setEndDate(null);
     }
   }, [dateRange]);
-
-  const users = ["haim", "ben", "omer", "yoav"];
-
-  const coupons = [
-    {
-      _id: "123456789",
-      couponCode: "123456",
-      description: "הנחת חבר בתוקף ל 3 חודשים או עד כמר המלאי",
-      doublePromotions: true,
-      expirDate: "03/4/2024",
-      limitedUses: 3,
-      doubleUses: false,
-      createAt: "7/11/2024",
-      userId: "124334523425",
-    },
-    {
-      _id: "123456789",
-      couponCode: "123456",
-      description: "הנחת חבר בתוקף ל 3 חודשים או עד כמר המלאי",
-      doublePromotions: true,
-      expirDate: "03/4/2024",
-      limitedUses: 3,
-      doubleUses: false,
-      createAt: "7/11/2024",
-      userId: "124334523425",
-    },
-    {
-      _id: "123456789",
-      couponCode: "123456",
-      description: "הנחת חבר בתוקף ל 3 חודשים או עד כמר המלאי",
-      doublePromotions: true,
-      expirDate: "03/4/2024",
-      limitedUses: 3,
-      doubleUses: false,
-      createAt: "7/11/2024",
-      userId: "124334523425",
-    },
-  ];
 
   const userColumns = [
     {
@@ -120,7 +92,7 @@ const CouponsList = (props) => {
           <label>מיין לפי משתמש</label>
           <select name="user" onChange={onChangeUser}>
             <option></option>
-            {users.map((user) => {
+            {users && users && users.map((user) => {
               return <option value={user}>{user}</option>;
             })}
           </select>
@@ -140,14 +112,15 @@ const CouponsList = (props) => {
           </LocalizationProvider>
         </div>
       </div>
-      <DataGrid
+      {!coupons ? <Loader />
+       : <DataGrid
         className="datagrid"
         rows={coupons || 0}
         getRowId={(row) => row?._id || 0}
         columns={userColumns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
-      />
+      />}
     </div>
   );
 };

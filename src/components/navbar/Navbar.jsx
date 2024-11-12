@@ -1,12 +1,11 @@
 import React, { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
+import { useAuth } from "../../context/Auth";
 import "./navbar.css";
 
 const Navbar = () => {
-  const user = {
-    role: "admin",
-  };
+  const { isAuthenticated, isAdmin, logout } = useAuth();
 
   return (
     <div className="navbarContainer">
@@ -15,30 +14,30 @@ const Navbar = () => {
           קופונים
         </Link>
         <ul className="navbarList">
-          {user.role === "admin" && (
+          {isAdmin && (
             <li className="navbar-item">
               <Link to="/admin/addUser" className="navbarLink">
                 צור משתמש
               </Link>
             </li>
           )}
-          {user.role === "admin" && (
+          {isAdmin && (
             <li className="navbar-item">
               <Link to="/admin/addCoupon" className="navbarLink">
                 צור קופון
               </Link>
             </li>
           )}
-          {user.role === "admin" && (
+          {isAdmin && (
             <li className="navbar-item">
               <Link to="/admin" className="navbarLink">
                 <PersonIcon />
               </Link>
             </li>
           )}
-          {user ? (
+          {isAuthenticated ? (
             <li className="navbarItem">
-              <Link to="/logout" className="navbarLink">
+              <Link to="/" className="navbarLink" onClick={logout}>
                 התנתק
               </Link>
             </li>

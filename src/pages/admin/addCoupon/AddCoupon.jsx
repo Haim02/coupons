@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useCoupons } from '../../../context/Coupon';
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -13,6 +14,7 @@ import './addCoupon.css'
 
 const AddCoupon = () => {
   const isFetching = false;
+  const { addCoupon, loading } = useCoupons();
   let date = new Date();
   const [value, setValue] = useState(dayjs(date));
   const [couponValues, setCouponValues] = useState({
@@ -53,6 +55,7 @@ const AddCoupon = () => {
 
   const hanleOnSubmit = (e) => {
     e.preventDefault();
+    addCoupon(couponValues)
   };
 
   return (
@@ -135,7 +138,7 @@ const AddCoupon = () => {
       <div className="addCouponBtnContainer">
         <Button
           type="submit"
-          text={isFetching ? <Loader /> : "צור קופון"}
+          text={loading ? <Loader /> : "צור קופון"}
         />
       </div>
     </form>

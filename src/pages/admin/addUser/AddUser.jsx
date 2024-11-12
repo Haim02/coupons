@@ -2,24 +2,22 @@ import React, { useState } from "react";
 import Button from "../../../components/button/Button";
 import Input from "../../../components/input/Input";
 import Loader from "../../../components/Loader";
+import { useAuth } from "../../../context/Auth";
 import "./addUser.css";
 
 const AddUser = () => {
+  const { login, loading, error } = useAuth();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const isFetching = false;
   const [userValues, setUserValues] = useState({
     username: "",
     password: "",
   });
 
-  const handleOnChange = (e) => {
-    setUserValues((pre) => ({
-      ...pre,
-      [e.target.name]: e.target.value.trim(),
-    }));
-  };
-
   const hanleOnSubmit = (e) => {
     e.preventDefault();
+    login( username, password )
   };
 
   return (
@@ -32,20 +30,20 @@ const AddUser = () => {
             name="username"
             placeholder="שם משתמש"
             type="text"
-            onChange={handleOnChange}
+            onChange={e => setUsername(e.target.value)}
           />
           <Input
             lable="סיסמה"
             name="username"
             placeholder="סיסמה"
             type="text"
-            onChange={handleOnChange}
+            onChange={e => setPassword(e.target.value)}
           />
         </div>
         <div className="addUserBtnContainer">
           <Button
             type="submit"
-            text={isFetching ? <Loader /> : "שמור"}
+            text={loading ? <Loader /> : "שמור"}
           />
         </div>
       </form>

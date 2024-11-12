@@ -9,7 +9,9 @@ import "dayjs/locale/he";
 import Input from "../input/Input";
 import Button from "../button/Button";
 import Loader from "./../Loader";
+import { useCoupons } from "../../context/Coupon";
 import "./updateCoupon.css";
+import { useLocation } from "react-router-dom";
 
 const UpdateCoupon = ({
   hanleOnSubmit,
@@ -18,6 +20,9 @@ const UpdateCoupon = ({
   percentOrAmount,
   isFetching,
 }) => {
+  const location = useLocation();
+  const couponId = location.pathname.split("/")[2];
+  const { coupons, loading, updateCoupon } = useCoupons();
   let date = new Date();
   const [value, setValue] = useState(dayjs(date));
   const [couponValues, setCouponValues] = useState({
@@ -30,10 +35,16 @@ const UpdateCoupon = ({
     percentOrAmount: "",
   });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateCoupon(couponId, couponValues)
+  };
+
+
   return (
     <div className="updateCoumponContainer">
       <h1>עדכן קופון</h1>
-      <form className="updateForm" onSubmit={hanleOnSubmit}>
+      <form className="updateForm" onSubmit={handleSubmit}>
         <div className="inputFormContainer">
           <Input
             lable="קוד קופון"
