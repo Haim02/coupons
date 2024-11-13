@@ -9,7 +9,7 @@
     width: 300px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 70px;
+    padding: 50px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-family: Arial, sans-serif;
@@ -20,10 +20,39 @@
     display: flex;
     gap: 10px;
     text-align: right;
-    display: flex;
     flex-direction: column;
 }
 
 .addUserBtnContainer {
     margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .addUserForm {
+        width: 70%;
+        padding: 30px;
+    }
+
+    .addUserInputContainer {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .addUserForm {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .addUserForm h1 {
+        font-size: 20px;
+    }
+
+    .addUserInputContainer {
+        gap: 5px;
+    }
+
+    .addUserBtnContainer {
+        width: 100%;
+    }
 }

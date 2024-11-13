@@ -1,38 +1,82 @@
-.datatableContainer {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background-color: #fff;
-    margin: 60px 100px;
-    padding: 20px 90px;
+ .datatableContainer {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  margin: 60px 100px;
+  padding: 20px 90px;
 }
 
-.datatableCard{
-    width: 100%;
-    font-size: 24px;
-    color: gray;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.datatableCard {
+  width: 100%;
+  font-size: 24px;
+  color: gray;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .inputContainer select {
-  height: 45px;
-  position: relative;
-  bottom: -17px;
+height: 45px;
+position: relative;
+bottom: -17px;
 }
 
 .inputContainer label {
-  font-size: large;
+font-size: large;
 }
 
 .viewButton {
-  width: 50%;
-  text-align: center;
-  margin-left: 20px;
+width: 50%;
+text-align: center;
+margin-left: 20px;
 }
 
+@media (max-width: 768px) {
+  .datatableContainer {
+      margin: 40px 20px;
+      padding: 15px 40px;
+  }
 
+  .datatableCard {
+      font-size: 20px;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .viewButton {
+      width: 100%;
+      margin: 10px 0 0;
+  }
+
+  .inputContainer select {
+      height: 40px;
+      bottom: -10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .datatableContainer {
+      margin: 20px 10px;
+      padding: 10px 20px;
+  }
+
+  .datatableCard {
+      font-size: 18px;
+  }
+
+  .inputContainer select {
+      width: 100%;
+      height: 35px;
+      bottom: -5px;
+  }
+
+  .viewButton {
+      width: 100%;
+      margin: 10px 0 0;
+      font-size: 16px;
+  }
+}

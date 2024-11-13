@@ -4,8 +4,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
 import "dayjs/locale/he";
 import Input from "../../../components/input/Input";
 import Loader from "../../../components/Loader";
@@ -13,7 +11,7 @@ import Button from "../../../components/button/Button";
 import "./addCoupon.css";
 
 const AddCoupon = () => {
-  const { addCoupon, loading, error } = useCoupons();
+  const { addCoupon, loading, error, addCouponError } = useCoupons();
   let date = new Date();
   const [value, setValue] = useState(dayjs(date));
   const [couponValues, setCouponValues] = useState({
@@ -125,7 +123,7 @@ const AddCoupon = () => {
             </LocalizationProvider>
           </div>
         </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {addCouponError && <p style={{ color: "red" }}>{addCouponError}</p>}
         <div className="addCouponBtnContainer">
           <Button type="submit" text={loading ? <Loader /> : "צור קופון"} />
         </div>

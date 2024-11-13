@@ -17,6 +17,8 @@ export const CouponProvider = ({ children }) => {
     try {
       const response = await axios.post(`${PATH}/coupons/couponDiscount`, couponCode);
       setCoupon(response.data);
+      setLoading(false)
+      setError(null);
     } catch (err) {
       setLoading(false);
       setError("שגיאה במשיכת נתונים");
@@ -29,6 +31,8 @@ export const CouponProvider = ({ children }) => {
     try {
       const response = await axios.get(`${PATH}/coupons`);
       setCoupons(response.data);
+      setLoading(false);
+      setError(null);
     } catch (err) {
       setLoading(false);
       setError("שגיאה במשיכת נתונים");
@@ -42,6 +46,8 @@ export const CouponProvider = ({ children }) => {
     try {
       const response = await axios.post(`${PATH}/createCoupon`, couponData);
       setCoupons((prevCoupons) => [...prevCoupons, response.data]);
+      setLoading(false);
+      setError(null);
     } catch (err) {
       setLoading(false);
       setError("שגיאה ביצירת קופון חדש");
@@ -51,6 +57,7 @@ export const CouponProvider = ({ children }) => {
   // PUT request to update coupon
   const updateCoupon = async (id, updatedData) => {
     setLoading(true);
+    setError(null);
     try {
       const response = await axios.put(
         `${PATH}/updateCoupon/${id}`,
@@ -59,6 +66,7 @@ export const CouponProvider = ({ children }) => {
       setCoupons((prevCoupons) =>
         prevCoupons.map((coupon) => (coupon.id === id ? response.data : coupon))
       );
+      setLoading(false);
     } catch (err) {
       setLoading(false);
       setError("שגיאה בעריכת קופון");
@@ -68,11 +76,13 @@ export const CouponProvider = ({ children }) => {
   // DELETE request to delete coupon
   const deleteCoupon = async (id) => {
     setLoading(true);
+    setError(null);
     try {
       await axios.delete(`${PATH}/deleteCoupon/${id}`);
       setCoupons((prevCoupons) =>
         prevCoupons.filter((coupon) => coupon.id !== id)
       );
+      setLoading(false);
     } catch (err) {
       setLoading(false);
       setError("שגיאה במחיקת קופון");
@@ -85,6 +95,7 @@ export const CouponProvider = ({ children }) => {
         coupons,
         loading,
         error,
+        setError,
         gettAllCoupons,
         addCoupon,
         updateCoupon,

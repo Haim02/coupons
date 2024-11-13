@@ -51,12 +51,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-
-          {/* <Route path="/admin" element={<CouponsList />} />
-      <Route path="/admin/copons/:id" element={<Onecoupon />} />
-      <Route path="/admin/addUser" element={<AddUser />} />
-      <Route path="/admin/addCoupon" element={<AddCoupon />} /> */}
-      <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </CouponProvider>
     </AuthProvider>

@@ -10,22 +10,23 @@ import "dayjs/locale/he";
 import Button from "../../../components/button/Button";
 import { useCoupons } from "../../../context/Coupon";
 import { useAuth } from "../../../context/Auth";
+import { fakeCoupons } from "../../../fakeData";
 import "./couponsList.css";
-import Loader from "../../../components/Loader";
 
 const CouponsList = () => {
-  const { coupons, loading, gettAllCoupons } = useCoupons();
+  const { coupons, gettAllCoupons } = useCoupons();
   const { users, getUsers } = useAuth();
   let date = new Date();
   const [dateRange, setDateRange] = useState([dayjs(date), dayjs(date)]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [user, setUser] = useState("");
-
+  
+  // get coupons and users on first render
   useEffect(() => {
     gettAllCoupons();
     getUsers();
-  }, [gettAllCoupons]);
+  }, []);
 
   const onChangeUser = (e) => {
     setUser(e.target.value);
@@ -114,13 +115,12 @@ const CouponsList = () => {
           </LocalizationProvider>
         </div>
       </div>
-      {loading && <Loader />}
       {!coupons ? (
         <h3>לא נמצאו קופונים</h3>
       ) : (
         <DataGrid
           className="datagrid"
-          rows={coupons || 0}
+          rows={fakeCoupons}
           getRowId={(row) => row?._id || 0}
           columns={userColumns.concat(actionColumn)}
           pageSize={9}

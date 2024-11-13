@@ -30,17 +30,18 @@ const UpdateCoupon = () => {
   const handleOnChange = (event) => {
     const newValue = event.target.value;
     const inputName = event.target.name;
-    setCouponValues((prevState) => {
-      return {
+    setCouponValues((prevState)=> {
+      return({
         ...prevState,
         [inputName]: newValue,
-      };
+      });
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (error) {
+      alert('שגיאה בעדכון הקופון')
       return;
     }
     updateCoupon(couponId, couponValues);
@@ -123,7 +124,6 @@ const UpdateCoupon = () => {
           </div>
         </div>
         <div className="updateBtnContainer">
-          {error && <p style={{ color: "red" }}>{error}</p>}
           <Button type="submit" text={loading ? <Loader /> : "עדכן"} />
         </div>
       </form>

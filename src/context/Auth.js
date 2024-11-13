@@ -17,13 +17,16 @@ export const AuthProvider = ({ children }) => {
 
   // admin login withe username and password
   const login = (username, password) => {
+    setLoading(true);
     setError(null);
     if (username === "admin" && password === "admin123") {
+      navigate("/admin");
       setIsAuthenticated(true);
       setIsAdmin(true);
-      navigate("/admin");
+      setLoading(false);
     } else {
-      alert("שם משתמש או סיסמה לא נכונים");
+      setLoading(false);
+      setError(" משתמש או סיסמה לא נכונים");
     }
   };
 
@@ -34,8 +37,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post(
         `${PATH}/admin/addUser`,
-        username,
-        password
+        {username,
+        password}
       );
     } catch (err) {
       setLoading(false);
@@ -50,14 +53,16 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.get(`${PATH}/admin/users`);
       setUsers(response.data);
+      setError(null);
     } catch (err) {
       setLoading(false);
       setError("לא נמצאו משתמשים");
-    } finally {
     }
   };
 
   const logout = () => {
+    setLoading(false);
+    setError(null);
     setIsAuthenticated(false);
     setIsAdmin(false);
     setUser(null);

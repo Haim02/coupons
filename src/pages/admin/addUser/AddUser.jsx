@@ -20,9 +20,13 @@ const AddUser = () => {
       return;
     }
 
+    if (error) {
+      return;
+    }
+
     addUser(username, password);
     setErr("");
-    alert("קופון נוצר בהצלחה");
+    alert("משתמש נוצר בהצלחה");
   };
 
   return (
@@ -45,7 +49,6 @@ const AddUser = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           {err && <p style={{ color: "red" }}>{err}</p>}
-          {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
         <div className="addUserBtnContainer">
           <Button type="submit" text={loading ? <Loader /> : "שמור"} />

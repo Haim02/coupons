@@ -3,13 +3,18 @@ import Button from "../button/Button";
 import Loader from "../Loader";
 import { useCoupons } from "../../context/Coupon";
 import { useLocation } from "react-router-dom";
+import { fakeCoupons } from "../../fakeData";
 import "./couponDetails.css";
 
 const CouponDetails = () => {
   const location = useLocation();
-  const couponId = location.pathname.split("/")[2];
+  const couponId = location.pathname.split("/")[3];
   const { coupons, deleteCoupon, loading } = useCoupons();
-  const coupon = coupons.find((coupon) => coupon._id === couponId);
+  const fakeCoupon = fakeCoupons.find(element => element._id === couponId)
+
+  //find coupon from coupons arry
+  const coupon = coupons.find((coupon) => coupon._id === couponId) || fakeCoupon;
+
 
   const handleDelete = () => {
     deleteCoupon(couponId);

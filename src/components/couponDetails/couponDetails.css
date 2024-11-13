@@ -1,9 +1,14 @@
 .couponDetailsContainer {
-    margin-left: 10px;
+    width: 40%;
 }
 
 .couponDetailsCard {
     border: solid gray 0.5px;
+    border-radius: 4px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 .listGroupItem {
@@ -12,10 +17,12 @@
     padding: 5px;
     border-bottom: 0.5px solid black;
     text-align: right;
+    padding-right: 70px;
+    padding-left: 70px;
 }
 
 .listGroupItem span {
-   text-align: center;
+    text-align: center;
 }
 
 .listGroupItem h2 {
@@ -26,12 +33,50 @@
     padding: 0 10px;
     display: flex;
     flex-direction: row-reverse;
-
+    flex-wrap: wrap;
 }
+
 .col {
     margin-left: 10px;
+    flex: 1;
 }
 
 .hr {
     border: 1px solid rgb(238, 237, 237);
+    margin: 10px 0;
+}
+
+.deleteBtnContainer {
+    margin-top: 35px;
+}
+
+@media (max-width: 480px) {
+    .couponDetailsContainer {
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    .couponDetailsCard {
+        padding: 5px;
+    }
+
+    .listGroupItem {
+        padding: 3px 10px;
+        font-size: 12px;
+    }
+
+    .listGroupItem h2 {
+        font-size: 16px;
+    }
+
+    .row {
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .col {
+        margin-left: 0;
+        margin-bottom: 8px;
+        width: 100%;
+    }
 }

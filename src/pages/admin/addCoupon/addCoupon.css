@@ -1,5 +1,5 @@
 .addCoumponContainer {
-    width: 30%;
+    width: 50%;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -9,10 +9,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     margin: auto;
-    width: 50%;
-    padding: 10px;
+    padding: 20px;
 }
 
 .addCoumponContainer h1 {
@@ -27,10 +25,6 @@
      display: flex;
      flex-direction: row;
      flex-wrap: wrap;
-     justify-content: center;
-     align-items: center;
-     justify-content: end;
-     justify-content: space-between;
      justify-content: space-around;
      padding: 50px;
 }
@@ -57,9 +51,8 @@
     padding: 9px 8px;
     text-align: right;
     border: 1px solid black;
-    width: 100%;
-    margin-bottom: 15px;
     width: 170px;
+    margin-bottom: 15px;
 }
 
 .option {
@@ -67,21 +60,53 @@
 }
 
 .AddCouponInputContainerDate {
-    margin-top: 0px;
     display: flex;
     flex-direction: column;
     text-align: right;
-    margin-bottom: 2px;
     margin-top: 5px;
-
+    margin-bottom: 2px;
 }
 
 .addCouponBtnContainer {
     display: flex;
     justify-content: center;
     align-self: center;
-    justify-self: center;
     width: 97%;
-    margin-top: 0;
+    margin-top: 10px;
     padding: 5px 10px;
+}
+
+@media (max-width: 480px) {
+    .addCoumponContainer {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .addCoumponContainer h1 {
+        font-size: 18px;
+    }
+
+    .inputAddFormContainer {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .inputAddContainer {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .inputContainer select {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .textarea {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    .addCouponBtnContainer {
+        width: 100%;
+    }
 }

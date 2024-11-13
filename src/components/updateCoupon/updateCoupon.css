@@ -1,5 +1,5 @@
 .updateCoumponContainer {
-    width: 30%;
+    width: 40%;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -77,6 +77,37 @@
     align-self: center;
     justify-self: center;
     width: 97%;
-    margin-top: 0;
+    margin-top: 20px;
     padding: 5px 10px;
+}
+
+@media (max-width: 480px) {
+    .updateCoumponContainer {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .updateCoumponContainer h1 {
+        font-size: 18px;
+    }
+
+    .inputFormContainer {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .inputContainer select {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .textarea {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    .updateBtnContainer {
+        width: 100%;
+        font-size: 14px;
+    }
 }

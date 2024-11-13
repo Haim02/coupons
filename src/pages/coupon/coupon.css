@@ -1,5 +1,5 @@
 .couponContainer {
-     height: 70vh;
+    height: 70vh;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -32,16 +32,7 @@
     flex: 1;
   }
 
-  .couponInput button {
-    padding: 8px 12px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .couponInput button:hover {
+  .couponInput Button:hover {
     background-color: #45a049;
   }
 
@@ -112,3 +103,30 @@
     border: 1px solid rgb(238, 237, 237);
     width: 100%;
 }
+
+@media (max-width: 480px) {
+  .couponCard {
+      width: 95%;
+      padding: 30px 15px;
+  }
+
+  .discountList li {
+      font-size: 16px;
+  }
+
+  .couponInput input {
+      padding: 6px;
+      font-size: 14px;
+  }
+
+  .couponInput button {
+      padding: 5px 8px;
+      font-size: 12px;
+  }
+
+  .removeBtn {
+      padding: 2px 6px;
+      font-size: 12px;
+  }
+}
+

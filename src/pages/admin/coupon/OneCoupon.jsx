@@ -5,8 +5,8 @@ import "./oneCoupon.css";
 const Onecoupon = () => {
   return (
     <div className="oneCoumponContainer">
-      <CouponDetails />
       <UpdateCoupon />
+      <CouponDetails />
     </div>
   );
 };
